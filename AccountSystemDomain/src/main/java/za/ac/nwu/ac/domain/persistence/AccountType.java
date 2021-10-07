@@ -18,6 +18,9 @@ public class AccountType implements Serializable{
 
     private Set<AccountUserTransaction> accountUserTransactions;
 
+    public AccountType()
+    {}
+
     public AccountType(Long accountTypeId, String mnemonic, String accountTypeName, LocalDate creationDate) {
         this.accountTypeId = accountTypeId;
         this.mnemonic = mnemonic;
@@ -25,8 +28,12 @@ public class AccountType implements Serializable{
         this.creationDate = creationDate;
     }
 
-    public AccountType()
-    {}
+    public AccountType(String mnemonic, String accountTypeName, LocalDate creationDate)
+    {
+        this.mnemonic = mnemonic;
+        this.accountTypeName = accountTypeName;
+        this.creationDate = creationDate;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
