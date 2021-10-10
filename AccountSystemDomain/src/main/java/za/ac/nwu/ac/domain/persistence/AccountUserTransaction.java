@@ -28,6 +28,13 @@ public class AccountUserTransaction implements Serializable{
         this.transactionDate = transactionDate;
     }
 
+    public AccountUserTransaction(Long transactionID,Long memberId, Long amount, LocalDate transactionDate) {
+        this.transactionID = transactionID;
+        this.memberId = memberId;
+        this.amount = amount;
+        this.transactionDate = transactionDate;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "TRANSACTION_ID", nullable = false)
