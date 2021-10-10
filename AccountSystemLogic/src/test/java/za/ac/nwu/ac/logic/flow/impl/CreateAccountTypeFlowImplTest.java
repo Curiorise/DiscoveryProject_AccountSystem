@@ -10,11 +10,13 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import za.ac.nwu.ac.domain.dto.AccountTypeDto;
 import za.ac.nwu.ac.translator.AccountTypeTranslator;
+
+import java.time.LocalDate;
+
+import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.verify;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CreateAccountTypeFlowImplTest {
@@ -35,8 +37,10 @@ public class CreateAccountTypeFlowImplTest {
 
     @Test
     public void create() {
-        when(translator.create(any(AccountTypeDto.class))).thenReturn(new AccountTypeDto());
-        flow.create(new AccountTypeDto());
-        verify(translator, atLeastOnce()).create(any(AccountTypeDto.class));
+        when(translator.create(any(AccountTypeDto.class))).then(returnsFirstArg());
+        AccountTypeDto result = flow.create(new AccountTypeDto());
+        assertNotNull(result);
+        assertEquals(LocalDate.now(), result.getCreationDate());
+        verify(translator, times(2)).create(any(AccountTypeDto.class));
     }
 }
