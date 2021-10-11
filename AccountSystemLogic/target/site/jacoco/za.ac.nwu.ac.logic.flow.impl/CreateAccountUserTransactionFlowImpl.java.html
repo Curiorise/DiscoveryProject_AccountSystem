@@ -5,7 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.ac.nwu.ac.domain.dto.AccountUserTransactionDto;
+import za.ac.nwu.ac.domain.persistence.AccountType;
 import za.ac.nwu.ac.logic.flow.CreateAccountUserTransactionFlow;
+import za.ac.nwu.ac.logic.flow.FetchAccountTypeFlow;
 import za.ac.nwu.ac.translator.AccountUserTransactionTranslator;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
@@ -14,23 +16,36 @@ import java.time.LocalDate;
 @Component(&quot;createAccountUserTransactionFlow&quot;)
 public class CreateAccountUserTransactionFlowImpl implements CreateAccountUserTransactionFlow {
 
-<span class="nc" id="L17">    private static final Logger LOGGER = LoggerFactory.getLogger(CreateAccountUserTransactionFlowImpl.class);</span>
+<span class="nc" id="L19">    private static final Logger LOGGER = LoggerFactory.getLogger(CreateAccountUserTransactionFlowImpl.class);</span>
 
     private final AccountUserTransactionTranslator accountUserTransactionTranslator;
+    private final FetchAccountTypeFlow fetchAccountTypeFlow;
 
     @Autowired
-<span class="nc" id="L22">    public CreateAccountUserTransactionFlowImpl(AccountUserTransactionTranslator accountUserTransactionTranslator){</span>
-<span class="nc" id="L23">        this.accountUserTransactionTranslator = accountUserTransactionTranslator;</span>
-<span class="nc" id="L24">    }</span>
+    public CreateAccountUserTransactionFlowImpl(AccountUserTransactionTranslator accountUserTransactionTranslator,
+<span class="nc" id="L26">                                                FetchAccountTypeFlow fetchAccountTypeFlow){</span>
+<span class="nc" id="L27">        this.accountUserTransactionTranslator = accountUserTransactionTranslator;</span>
+<span class="nc" id="L28">        this.fetchAccountTypeFlow = fetchAccountTypeFlow;</span>
+<span class="nc" id="L29">    }</span>
 
     @Override
     public AccountUserTransactionDto create(AccountUserTransactionDto accountUserTransactionDto){
-<span class="nc" id="L28">        LOGGER.info(&quot;The input object was {}&quot;, accountUserTransactionDto);</span>
-
-<span class="nc bnc" id="L30" title="All 2 branches missed.">        if(null == accountUserTransactionDto.getTransactionDate()){</span>
-<span class="nc" id="L31">            accountUserTransactionDto.setTransactionDate(LocalDate.now());</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">        if(LOGGER.isInfoEnabled()){</span>
+<span class="nc" id="L34">            String outputForLogging = &quot;null&quot;;</span>
+<span class="nc bnc" id="L35" title="All 4 branches missed.">            if((null != accountUserTransactionDto) &amp;&amp; (null != accountUserTransactionDto.getTransactionDate())){</span>
+<span class="nc" id="L36">               outputForLogging = accountUserTransactionDto.getTransactionDate().toString();</span>
+            }
+<span class="nc" id="L38">            LOGGER.info(&quot;The input object was {} and the Transaction Date is {}&quot;, accountUserTransactionDto, outputForLogging);</span>
         }
-<span class="nc" id="L33">        return accountUserTransactionTranslator.create(accountUserTransactionDto);</span>
+
+
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        if(LOGGER.isDebugEnabled()){</span>
+<span class="nc" id="L43">            LOGGER.debug(&quot;Got AccountUserTransaction for transaction ID {}&quot;, accountUserTransactionDto.getTransactionID());</span>
+        }
+
+<span class="nc" id="L46">        LOGGER.info(&quot;The return object is {}&quot;, accountUserTransactionTranslator.create(accountUserTransactionDto));</span>
+
+<span class="nc" id="L48">        return accountUserTransactionTranslator.create(accountUserTransactionDto);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

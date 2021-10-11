@@ -14,17 +14,17 @@ public class CreateAccountTypeFlowImpl implements CreateAccountTypeFlow {
 
     private final AccountTypeTranslator accountTypeTranslator;
 
-<span class="nc" id="L17">    public CreateAccountTypeFlowImpl(AccountTypeTranslator accountTypeTranslator){</span>
-<span class="nc" id="L18">        this.accountTypeTranslator = accountTypeTranslator;</span>
-<span class="nc" id="L19">    }</span>
+<span class="fc" id="L17">    public CreateAccountTypeFlowImpl(AccountTypeTranslator accountTypeTranslator){</span>
+<span class="fc" id="L18">        this.accountTypeTranslator = accountTypeTranslator;</span>
+<span class="fc" id="L19">    }</span>
 
     @Override
     public AccountTypeDto create(AccountTypeDto accountType){
-<span class="nc bnc" id="L23" title="All 2 branches missed.">        if(null == accountType.getCreationDate()){</span>
-<span class="nc" id="L24">            accountType.setCreationDate(LocalDate.now());</span>
+<span class="pc bpc" id="L23" title="1 of 2 branches missed.">        if(null == accountType.getCreationDate()){</span>
+<span class="fc" id="L24">            accountType.setCreationDate(LocalDate.now());</span>
         }
-<span class="nc" id="L26">        AccountTypeDto accountTypeDto = accountTypeTranslator.create(accountType);</span>
-<span class="nc" id="L27">        return accountTypeTranslator.create(accountTypeDto);</span>
+<span class="fc" id="L26">        AccountTypeDto accountTypeDto = accountTypeTranslator.create(accountType);</span>
+<span class="fc" id="L27">        return accountTypeTranslator.create(accountTypeDto);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
