@@ -1,5 +1,7 @@
-za\ac\nwu\ac\domain\persistence\AccountUserTransaction.class
 za\ac\nwu\ac\domain\dto\AccountTypeDto.class
-za\ac\nwu\ac\domain\persistence\AccountType.class
 za\ac\nwu\ac\domain\dto\AccountUserTransactionDto.class
+za\ac\nwu\ac\domain\persistence\AccountUserTransaction.class
+za\ac\nwu\ac\domain\persistence\Balance.class
+za\ac\nwu\ac\domain\dto\BalanceDto.class
+za\ac\nwu\ac\domain\persistence\AccountType.class
 za\ac\nwu\ac\domain\service\GeneralResponse.class
